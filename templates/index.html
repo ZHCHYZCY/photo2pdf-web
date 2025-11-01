@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Photo → PDF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { font-family: sans-serif; max-width: 800px; margin: 40px auto; }
+      .card { padding: 20px; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+      button { padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+      .flash { color: #c33; margin-bottom: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>图片转 PDF</h1>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">
+            {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('convert') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="photos" accept="image/*" multiple />
+        <button type="submit">合并为 PDF</button>
+      </form>
+    </div>
+  </body>
+</html>
